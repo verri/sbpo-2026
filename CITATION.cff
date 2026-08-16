@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "Cross-Validation Strategies for Multi-Series Time Series Forecasting"
+abstract: >-
+  Experiment code accompanying the SBPO 2026 paper "On Cross-Validation
+  Strategies for Autoregressive Forecasting".  Compares KFold,
+  GroupKFold, GroupShuffleSplit, and TimeSeriesSplit for multi-series
+  forecasting with global models, under both temporal and group
+  generalization, across seven public datasets and five regression
+  algorithms.
+type: software
+license: MIT
+repository-code: "https://github.com/verri/sbpo-2026"
+authors:
+  - family-names: Verri
+    given-names: Filipe Alves Neto
+    affiliation: "Instituto Curvelo / Federal University of São Paulo (UNIFESP)"
+  - family-names: Franco
+    given-names: Jorge Luiz
+    affiliation: "University of São Paulo (USP) / Instituto Curvelo"
+  - family-names: Quiles
+    given-names: Marcos Gonçalves
+    affiliation: "Federal University of São Paulo (UNIFESP)"
+keywords:
+  - cross-validation
+  - time series forecasting
+  - global forecasting models
+  - model selection
+  - error estimation
+preferred-citation:
+  type: conference-paper
+  title: "On Cross-Validation Strategies for Autoregressive Forecasting"
+  collection-title: "Simpósio Brasileiro de Pesquisa Operacional (SBPO)"
+  year: 2026
+  authors:
+    - family-names: Verri
+      given-names: Filipe Alves Neto
+    - family-names: Franco
+      given-names: Jorge Luiz
+    - family-names: Quiles
+      given-names: Marcos Gonçalves

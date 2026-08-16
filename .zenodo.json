@@ -1,0 +1,27 @@
+{
+  "title": "Cross-Validation Strategies for Multi-Series Time Series Forecasting",
+  "upload_type": "software",
+  "license": "mit",
+  "description": "<p>Experiment code accompanying the SBPO 2026 paper <em>On Cross-Validation Strategies for Autoregressive Forecasting</em>.</p><p>The paper compares four cross-validation strategies (KFold, GroupKFold, GroupShuffleSplit, and TimeSeriesSplit) for multi-series forecasting with global models, under two deployment scenarios: forecasting the future of series seen in training, and forecasting series never seen in training. It evaluates calibration bias, Nadeau&ndash;Bengio interval coverage, window-selection regret, and multi-step autoregressive robustness across seven public datasets (Electricity, PEMS-BAY, METR-LA, GSOD, PAMAP2, MHEALTH, HAR) and five regression algorithms.</p><p>This repository holds the download, preprocessing, experiment, analysis, and figure-generation scripts. Raw data is not distributed; <code>make download</code> retrieves every dataset from its original source, listed with URLs and DOIs in <code>datasets.json</code>. Three fixed seeds control all stochastic operations and package versions are pinned, so a full re-run reproduces the published numbers.</p>",
+  "creators": [
+    {
+      "name": "Verri, Filipe Alves Neto",
+      "affiliation": "Instituto Curvelo / Federal University of São Paulo (UNIFESP)"
+    },
+    {
+      "name": "Franco, Jorge Luiz",
+      "affiliation": "University of São Paulo (USP) / Instituto Curvelo"
+    },
+    {
+      "name": "Quiles, Marcos Gonçalves",
+      "affiliation": "Federal University of São Paulo (UNIFESP)"
+    }
+  ],
+  "keywords": [
+    "cross-validation",
+    "time series forecasting",
+    "global forecasting models",
+    "model selection",
+    "error estimation"
+  ]
+}

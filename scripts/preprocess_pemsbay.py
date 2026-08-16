@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+"""Preprocess PEMS-BAY traffic speed dataset into tidy parquet.
+
+Output format:
+    group (str): sensor ID (column name from the CSV)
+    time_step (int): sequential index within the group (one per 2-hour bin)
+    speed_mph (float): mean traffic speed in mph per 2-hour bin
+
+The raw CSV has a timestamp column and one column per sensor.
+We melt to long format.  Missing values (0 or NaN) are forward-filled
+within each sensor.  Sensors with >10% missing data are excluded.
+Samples are block-averaged to 2-hour means.
+"""
+
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+RAW_DIR = Path("data/raw/pemsbay")
+OUT_FILE = Path("data/processed/pemsbay.parquet")
+
+MAX_MISSING_FRAC = 0.10
+MAX_SENSORS = 100
+SEED = 42
+
+MIN_GROUP_LEN = 2 * 15 + 10  # 2 * max_window + horizon
+
+
+def main():
+    OUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    raw_path = RAW_DIR / "pems-bay.csv"
+    print(f"Reading {raw_path} ...")
+    df = pd.read_csv(raw_path, index_col=0, parse_dates=True)
+    print(f"  Shape: {df.shape} ({df.shape[0]} timestamps × {df.shape[1]} sensors)")
+
+    # Replace 0 with NaN (0 speed typically means missing sensor data).
+    df = df.replace(0, np.nan)
+
+    # Drop sensors with too many missing values.
+    missing_frac = df.isna().mean()
+    good_sensors = missing_frac[missing_frac <= MAX_MISSING_FRAC].index
+    print(f"  Keeping {len(good_sensors)} sensors (dropped {len(df.columns) - len(good_sensors)} with >{MAX_MISSING_FRAC:.0%} missing)")
+    df = df[good_sensors]
+
+    # Subsample sensors for tractability.
+    if len(good_sensors) > MAX_SENSORS:
+        rng = np.random.RandomState(SEED)
+        good_sensors = rng.choice(good_sensors, MAX_SENSORS, replace=False)
+        print(f"  Subsampled to {MAX_SENSORS} sensors")
+        df = df[good_sensors]
+
+    # Forward-fill within each sensor, then backward-fill.
+    df = df.ffill().bfill()
+
+    # Aggregate to 2-hour means (24 × 5-min readings per 2-hour bin).
+    print("  Aggregating to 2-hour means ...")
+    df = df.resample("2h").mean()
+    df = df.ffill().bfill()
+    print(f"  After resampling: {df.shape[0]} timestamps × {df.shape[1]} sensors")
+
+    # Melt to long format.
+    df.index.name = "timestamp"
+    long = df.reset_index().melt(id_vars="timestamp", var_name="group", value_name="speed_mph")
+    long["group"] = long["group"].astype(str)
+
+    # Add sequential time_step per group.
+    long = long.sort_values(["group", "timestamp"]).reset_index(drop=True)
+    long["time_step"] = long.groupby("group").cumcount()
+
+    # Drop groups shorter than the minimum required for sliding windows.
+    sizes = long.groupby("group").size()
+    short = sizes[sizes < MIN_GROUP_LEN].index
+    if len(short) > 0:
+        print(f"  Dropping {len(short)} groups with < {MIN_GROUP_LEN} rows")
+        long = long[~long["group"].isin(short)].copy()
+        long["time_step"] = long.groupby("group").cumcount()
+
+    long = long[["group", "time_step", "speed_mph"]]
+    long.to_parquet(OUT_FILE, index=False)
+    n_groups = long["group"].nunique()
+    n_steps = long.groupby("group").size().iloc[0]
+    print(f"  Saved {len(long):,} rows ({n_groups} sensors × {n_steps} bins) to {OUT_FILE}")
+
+
+if __name__ == "__main__":
+    main()

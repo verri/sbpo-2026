@@ -1,0 +1,79 @@
+{
+  "electricity": {
+    "name": "ElectricityLoadDiagrams20112014",
+    "url": "https://archive.ics.uci.edu/dataset/321/electricityloaddiagrams20112014",
+    "download_url": "https://archive.ics.uci.edu/static/public/321/electricityloaddiagrams20112014.zip",
+    "doi": "10.24432/C58C86",
+    "citation_bibtex": "@misc{electricityloaddiagrams20112014_321,\n  author       = {Trindade, Artur},\n  title        = {{ElectricityLoadDiagrams20112014}},\n  year         = {2015},\n  howpublished = {UCI Machine Learning Repository},\n  note         = {{DOI}: https://doi.org/10.24432/C58C86}\n}",
+    "description": "Electricity consumption of 370 clients, 15-min intervals, 2011-2014.",
+    "group_column": "client_id",
+    "sampling": "15 min",
+    "num_features": 1
+  },
+  "pamap2": {
+    "name": "PAMAP2 Physical Activity Monitoring",
+    "url": "https://archive.ics.uci.edu/dataset/231/pamap2+physical+activity+monitoring",
+    "download_url": "https://archive.ics.uci.edu/static/public/231/pamap2+physical+activity+monitoring.zip",
+    "doi": "10.24432/C5NW2H",
+    "citation_bibtex": "@inproceedings{reiss2012pamap2,\n  author    = {Reiss, Attila and Stricker, Didier},\n  title     = {Introducing a New Benchmarked Dataset for Activity Monitoring},\n  booktitle = {International Symposium on Wearable Computers (ISWC)},\n  year      = {2012},\n  doi       = {10.1109/ISWC.2012.13},\n  note      = {UCI ML Repository DOI: https://doi.org/10.24432/C5NW2H}\n}",
+    "description": "9 subjects, 18 activities, 3 IMUs (100 Hz) + heart rate (~9 Hz). Group = (subject, activity).",
+    "group_column": "group",
+    "sampling": "~9 Hz (resampled from 100 Hz to match heart rate)",
+    "num_features": 40
+  },
+  "mhealth": {
+    "name": "MHEALTH Dataset",
+    "url": "https://archive.ics.uci.edu/dataset/319/mhealth+dataset",
+    "download_url": "https://archive.ics.uci.edu/static/public/319/mhealth+dataset.zip",
+    "doi": "10.24432/C5TW22",
+    "citation_bibtex": "@misc{mhealth_319,\n  author       = {Banos, Oresti and Garcia, Rafael and Saez, Alejandro},\n  title        = {{MHEALTH Dataset}},\n  year         = {2014},\n  howpublished = {UCI Machine Learning Repository},\n  note         = {{DOI}: https://doi.org/10.24432/C5TW22}\n}",
+    "description": "10 subjects, 12 activities, chest/ankle/wrist sensors at 50 Hz. Group = (subject, activity).",
+    "group_column": "group",
+    "sampling": "50 Hz",
+    "num_features": 23
+  },
+  "har": {
+    "name": "Human Activity Recognition Using Smartphones",
+    "url": "https://archive.ics.uci.edu/dataset/240/human+activity+recognition+using+smartphones",
+    "download_url": "https://archive.ics.uci.edu/static/public/240/human+activity+recognition+using+smartphones.zip",
+    "doi": "10.24432/C54S4K",
+    "citation_bibtex": "@inproceedings{anguita:13,\n  author    = {Anguita, Davide and Ghio, Alessandro and Oneto, Luca and Parra, Xavier and Reyes-Ortiz, Jorge L.},\n  title     = {A Public Domain Dataset for Human Activity Recognition Using Smartphones},\n  booktitle = {21st European Symposium on Artificial Neural Networks (ESANN)},\n  year      = {2013},\n  address   = {Bruges, Belgium}\n}",
+    "description": "30 subjects, 6 activities, smartphone accelerometer+gyroscope at 50 Hz. Group = (subject, activity).",
+    "group_column": "group",
+    "sampling": "50 Hz",
+    "num_features": 9
+  },
+  "pemsbay": {
+    "name": "PEMS-BAY Traffic Speed",
+    "url": "https://github.com/liyaguang/DCRNN",
+    "download_url": "Google Drive (via gdown)",
+    "doi": null,
+    "citation_bibtex": "@inproceedings{li:18,\n  author    = {Li, Yaguang and Yu, Rose and Shahabi, Cyrus and Liu, Yan},\n  title     = {Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting},\n  booktitle = {International Conference on Learning Representations (ICLR)},\n  year      = {2018}\n}",
+    "description": "325 traffic sensors in San Francisco Bay Area, 5-min intervals, Jan-May 2017. Group = sensor.",
+    "group_column": "sensor_id",
+    "sampling": "5 min",
+    "num_features": 1
+  },
+  "metrla": {
+    "name": "METR-LA Traffic Speed",
+    "url": "https://github.com/liyaguang/DCRNN",
+    "download_url": "Google Drive (via gdown)",
+    "doi": null,
+    "citation_bibtex": "@inproceedings{li:18,\n  author    = {Li, Yaguang and Yu, Rose and Shahabi, Cyrus and Liu, Yan},\n  title     = {Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting},\n  booktitle = {International Conference on Learning Representations (ICLR)},\n  year      = {2018}\n}",
+    "description": "207 traffic sensors in Los Angeles, 5-min intervals, Mar-Jun 2012. Group = sensor.",
+    "group_column": "sensor_id",
+    "sampling": "5 min",
+    "num_features": 1
+  },
+  "gsod": {
+    "name": "Global Surface Summary of the Day",
+    "url": "https://www.ncei.noaa.gov/access/search/data-search/global-summary-of-the-day",
+    "download_url": "https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/{year}.tar.gz",
+    "doi": null,
+    "citation_bibtex": "@misc{noaa_gsod,\n  author       = {{National Oceanic and Atmospheric Administration}},\n  title        = {{Global Surface Summary of the Day (GSOD)}},\n  year         = {2024},\n  howpublished = {NOAA National Centers for Environmental Information},\n  url          = {https://www.ncei.noaa.gov/access/search/data-search/global-summary-of-the-day}\n}",
+    "description": "Daily weather summaries from ~12000 stations worldwide, 2021-2023. Group = station. Subsampled to 300 stations.",
+    "group_column": "station_id",
+    "sampling": "daily",
+    "num_features": 1
+  }
+}
